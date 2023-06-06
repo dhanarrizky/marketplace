@@ -1,0 +1,87 @@
+{% extends 'store/base.html' %}
+{% block title %}
+shop
+{% endblock title %}
+
+{% block content %}
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Our Shop</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="{% url 'home' %}">Home</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0">Shop</p>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+
+<!-- Shop Start -->
+<div class="container-fluid pt-5">
+
+
+        <!-- Shop Product Start -->
+        <div class="col">
+            <div class="row pb-3">
+                <div class="col-12 pb-1">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <form method="POST" action="{% url 'shop-search' %}">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" placeholder="Search by name">
+                                <div class="input-group-append">
+                                    <button class="input-group-text bg-transparent text-primary">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="dropdown ml-4">
+                            <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                        Sort by
+                                    </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
+                                    <a class="dropdown-item" href="{% url 'shop-sort' a.las_up %}">Latest</a>
+                                    <a class="dropdown-item" href="{% url 'shop-sort' a.price %}">cheapest price</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                {% if goods %}
+                    {% for g in goods %}
+                        <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                            <div class="card product-item border-0 mb-4">
+                                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                    <img class="img-fluid w-100" src="{{ g.image.url }}" alt="">
+                                </div>
+                                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                    <h6 class="text-truncate mb-3">{{ g.name }}</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <h6>${{ g.price }}</h6><h6 class="text-muted ml-2"><del>${{ g.price }}</del></h6>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between bg-light border">
+                                    <a href="{% url 'detail-page' g.slug %}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                                    <a href="
+                                    {% if user.is_authenticated %}{% url 'add-cart' g.id %}{% else %}{% url 'login' %}{% endif %}
+                                    " class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
+                
+                
+            </div>
+        </div>
+        <!-- Shop Product End -->
+    </div>
+</div>
+<!-- Shop End -->
+
+{% endblock content %}

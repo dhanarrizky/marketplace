@@ -1,0 +1,48 @@
+{% extends 'store/base.html' %}
+{% block title %}
+Login page
+{% endblock title %}
+{% block content %}
+
+<div class="container-scroller ">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth px-0 ">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5 bg-secondary">
+              <h4>Hello! let's get started</h4>
+              <h6 class="fw-light">registration page.</h6>
+              <form class="pt-3" method="POST">
+                {% csrf_token %}       
+                    <div class="form-group">
+                        {{ form.username }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password1 }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password2 }}
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Register</button>
+                    </div>
+                    <div class="my-2 d-flex justify-content-between align-items-center">
+                        <div class="form-check">
+                            <label class="form-check-label text-muted">
+                            </label>
+                        </div>
+                    </div>
+                <div class="text-center mt-4 fw-light">
+                  <p>register immediately and enjoy the convenience of shopping from the palm of your hand </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+
+{% endblock content %}

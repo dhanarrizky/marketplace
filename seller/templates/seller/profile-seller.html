@@ -1,0 +1,96 @@
+{% extends 'seller/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Profile Seller</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="{% url 'seller-home' %}">Home</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0">Profile</p>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+
+<!-- Checkout Start -->
+{% for g in profile_user %}
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-8">
+            <div class="mb-4">
+                <h4 class="font-weight-semi-bold mb-4">Company Profile</h4>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label>First Name</label>
+                        <input class="form-control" type="text" placeholder="John">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Last Name</label>
+                        <input class="form-control" type="text" placeholder="Doe">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>E-mail</label>
+                        <input class="form-control" type="email" placeholder="example@email.com">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Company Name</label>
+                        <input class="form-control" type="text" placeholder="+123 456 789">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>description</label>
+                        <input class="form-control" type="text" placeholder="123 Street">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Address Company</label>
+                        <input class="form-control" type="text" placeholder="123 Street">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Company Picture</label>
+                        <input class="form-control" type="text" placeholder="New York">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:90%;" value="submit"><strong>Update</strong></button>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-secondary text-center mb-5">
+            this profile picture position
+            {% if g.picture_company.url %}
+                <img src="{{ g.picture_company.url }}" alt="profile picture" style="width: 250px; height: 250px;border-radius: 50%;">
+            {% else %}
+                <img src="{% static 'img/user_none.png' %}" alt="profile picture" style="width: 250px; height: 250px;border-radius: 50%;">
+                Picture not Found !!
+            {% endif %}
+                <div class="card-header bg-secondary border-0">
+                    <h4 class="font-weight-semi-bold m-0">My Profile</h4>
+                    <h6 class="font-weight-semi-bold m-0">Hello {{ g.user }}</h6>
+                </div>
+                <div class="card-body">
+                    <hr class="mt-0">
+                    <div class="text-center mb-3 pt-1">
+                        <h6 class="font-weight-medium">{{ g.user.first_name }} {{ g.user.last_name }}</h6>
+                    </div>
+                    <div class="text-center">
+                        <h6 class="font-weight-medium">{{ g.user.email }}</h6>
+                    </div>
+                </div>
+                <hr class="mt-0">
+                <div class="card-footer border-secondary bg-transparent">
+                    <div class="d-flex justify-content-between mt-2">
+                        <a href="#">
+                            <h5 class="font-weight-bold"><a href="{% url 'logout-seller' %}" style="color:red;">Logout</a></h5>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<!-- Checkout End -->
+
+
+{% endblock content %}

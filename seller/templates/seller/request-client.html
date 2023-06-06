@@ -1,0 +1,74 @@
+{% extends 'seller/base.html' %}
+{% block content %}
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Request Client</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="{% url 'seller-home' %}">Home</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0">Request Client</p>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+
+<!-- Shop Start -->
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+
+        <!-- Shop Product Start -->
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-12 ">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <form action="">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search by name">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-transparent text-primary">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+
+                  {% if user_req %}
+                    {% for g in user_req %}
+                        {% for i in x_user %}
+                            {% if g.username.id != user.id %}
+                                {% if g.username.id == i %}
+                                    <div class="card mb-3 " style="height:150px; background-color:#99ccff;">
+                                        <div class="row g-0">
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    
+                                                    <h5 class="card-title">user : {{ g.username.id }}</h5>
+                                                    <h5 class="card-title">user : {{ g.username.username }}</h5>
+                                                    <button><a href="{% url 'detile-client-req' i %}">Go to Detaile</a></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                  {% endif %}
+                  
+            </div>
+        </div>
+        <!-- Shop Product End -->
+    </div>
+</div>
+<!-- Shop End -->
+
+
+    {{ g.client.quantity_cart }}<br/>
+  
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends 'seller/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<!-- Products Start -->
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+    </div>
+    <div class="row px-xl-5 pb-3">
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">price</th>
+                    <th scope="col">stock</th>
+                    <th scope="col">create</th>
+                    <th scope="col">las update</th>
+                    <th scope="col">action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for g in object_list %}
+                        {% if g.user.id == user.id %}
+                        <tr>
+                            <td scope="row">0</td>
+                            <td >{{ g.name }}</td>
+                            <td >{{ g.category }}</td>
+                            <td >{{ g.price }}</td>
+                            <td >{{ g.stock }}</td>
+                            <td >{{ g.create_at }}</td>
+                            <td >{{ g.update_at }}</td>
+                            <td>
+                                <a href="{% url 'update-product' g.id %}">Edit</a>
+                                <a href="{% url 'delete-product' g.id %}">Delete</a>
+                            </td>
+                        </tr>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+<!-- Products End -->
+
+
+{% endblock content %}

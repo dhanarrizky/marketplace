@@ -1,0 +1,77 @@
+{% extends 'seller/base.html' %}
+{% block content %}
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Post Product</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="{% url 'seller-home' %}">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Post Product</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">Post Your Product</h4>
+                    <form method="POST" enctype='multipart/form-data'>
+                    <div class="row">
+                            {% csrf_token %}
+                            {{ form.media }}
+                            {{ form.user }}
+                            <div class="col-md-6 form-group">
+                                <label>Category</label>
+                                {{ form.category }}
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Name Product</label>
+                                {{ form.name }}
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Price</label>
+                                {{ form.price }}
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Description Product</label>
+                                {{ form.description }}
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>stock</label>
+                                {{ form.stock }}
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>image</label>
+                                {{ form.image }}
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                </div>
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Hallo Admin</h4>
+                    </div>
+                    <div class="text-center">
+                        <p>You wanna sale something, and post all of that ?</p>
+                        <p>are you sure ?!!</p>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Post</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout End -->
+<script>
+    var name = "{{ user.id }}";
+    document.getElementById("elder").value = name;
+</script>
+
+{% endblock content %}

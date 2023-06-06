@@ -1,0 +1,123 @@
+{% extends 'seller/base.html' %}
+{% block content %}
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Request Client</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="{% url 'seller-home' %}">Home</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0">Request Client</p>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+
+<!-- Shop Start -->
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <!-- Shop Product Start -->
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-12 ">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <form action="">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search by name">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-transparent text-primary">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {% for m in membr %}
+                <div class="col-lg-8">
+                    <div class="mb-4">
+                        <h4 class="font-weight-semi-bold mb-4">Company Profile</h4>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>First Name</label><br/>
+                                <strong>{{ m.username.first_name }}</strong>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Last Name</label><br/>
+                                <strong>{{ m.username.last_name }}</strong>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>E-mail</label><br/>
+                                <strong>{{ m.username.email }}</strong>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Mobile No</label><br/>
+                                <strong>{{ m.mobile_no }}</strong>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Address Line 1</label><br/>
+                                <strong>{{ m.address_line1 }}</strong>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Address Line 2</label><br/>
+                                <strong>{{ m.address_line2 }}</strong>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>City</label><br/>
+                                <strong>{{ m.city }}</strong>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>State</label><br/>
+                                <strong>{{ m.state }}</strong>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>ZIP Code</label><br/>
+                                <strong>{{ m.zip_code }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <img src="{{ m.profile_pic.url }}">    
+                </div>
+                {% endfor %}
+
+                  {% if cartM %}
+                    {% for g in cartM %}
+                        {% if g.client.product.user.id == user.id %}
+                            {% if g.client.user.username.id == x %}
+                                <div class="card mb-3 " style="height:200px; background-color:#99ccff;">
+                                    <div class="row g-0">
+                                        <div class="col-md-2">
+                                            <img src="{{ g.client.product.image.url }}" class="img-fluid rounded-start" style="height:200px;weidth:150px;" alt="...">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">user : {{ g.client.user.username }}</h5>
+                                                    <p class="card-text">price : ${{ g.client.product.name }}</p>
+                                                    <p class="card-text">price : ${{ g.client.product.price }}</p>
+                                                    <p class="card-text">quantity : {{ g.client.quantity_cart }}</p>
+                                                    <p class="card-text">Total : {{ g.client.Total_per_product }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                  
+            </div>
+        </div>
+        <!-- Shop Product End -->
+    </div>
+</div>
+<!-- Shop End -->
+
+
+    {{ g.client.quantity_cart }}<br/>
+  
+{% endblock content %}

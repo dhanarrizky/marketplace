@@ -1,0 +1,140 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}
+checkout
+{% endblock title %}
+
+{% block content %}
+
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Hallo {{ user.username }}</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="">Home</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0">Profile</p>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Checkout Start -->
+<div class="container-fluid pt-5">
+    
+    <div class="row px-xl-5">
+        <div class="col-lg-8">
+
+            {% for p in prof %}
+        <form method="POST" action='{% url "update-profile" %}' enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-4">
+                <h4 class="font-weight-semi-bold mb-4">Billing Address</h4>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label>First Name</label>
+                        <input class="form-control" type="text" placeholder="{{ user.first_name }}" value="{{ user.first_name }}" name="first">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Last Name</label>
+                        <input class="form-control" type="text" placeholder="{{ user.last_name }}" value="{{ user.last_name }}" name="last">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>E-mail</label>
+                        <input class="form-control" type="email" placeholder="{{ user.email }}" value="{{ user.email }}" name="email">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Mobile No</label>
+                        <input class="form-control" type="text" placeholder="{{ p.mobile_no }}" value="{{ p.mobile_no }}" name="mobileNo">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Address Line 1</label>
+                        <input class="form-control" type="text" placeholder="{{ p.address_line1 }}" value="{{ p.address_line1 }}" name="address1">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Address Line 2</label>
+                        <input class="form-control" type="text" placeholder="{{ p.address_line2 }}" value="{{ p.address_line2 }}" name="address2">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Country</label>
+                        <input class="form-control" type="text" placeholder="{{ p.Country }}" value="{{ p.Country }}" name="Country">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>City</label>
+                        <input class="form-control" type="text" placeholder="{{ p.city }}" value="{{ p.city }}" name="city">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>State</label>
+                        <input class="form-control" type="text" placeholder="{{ p.state }}" value="{{ p.state }}" name="state">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>ZIP Code</label>
+                        <input class="form-control" type="text" placeholder="{{ p.zip_code }}" value="{{ p.zip_code }}" name="zCode">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:90%;" value="submit"><strong>Update</strong></button>
+        </form>
+    </div>
+        <div class="col-lg-4">
+                <div class="containerbg-secondary mb-2">
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        {% if p.profile_pic %}
+                        <img src="../../media/{{ p.profile_pic }}" alt="profile picture" style="width: 250px; height: 250px;border-radius: 50%;">
+                        {% else %}
+                        <img src="{% static 'img/user_none.png' %}" alt="profile picture" style="width: 250px; height: 250px;border-radius: 50%;">
+                        Picture not Found !!
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Hallo {{ user.username }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="font-weight-medium mb-3">My Profile</h5>
+                        <hr class="mt-0">
+                        <div class="d-flex justify-content-between mb-3 pt-1">
+                            <h6 class="font-weight-medium">Name</h6>
+                            <h6 class="font-weight-medium">{{ user.first_name }} {{user.last_name}}</h6>
+                        </div>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <div class="d-flex justify-content-between mt-2">
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><strong>Edit Picture</strong></a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <form method="POST" enctype="multipart/form-data" action="{% url 'update-profile-pic' %}">
+                                        {% csrf_token %}
+                                        <a href="#" class="dropdown-item"><input type="file" name="profilePic"></a>
+                                        <a href="#" class="dropdown-item"><button type="submit" class="btn-primary" value="submit"><strong>Upload</strong></button></a>
+                                    </form>    
+                                </div>
+                            </div>
+                            <h6 class="font-weight-bold"><a href="{% url 'logout' %}" style="color:red;">Logout</a></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">My Payment</h4>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5 class="font-weight-bold">My pay</h5>
+                            <h5 class="font-weight-bold">${{ p.mypay }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% endfor %}
+<script>
+        var name = "{{ user.id }}";
+        document.getElementById("elder").value = name;
+    </script>
+<!-- Checkout End -->
+
+{% endblock content %}
